@@ -170,7 +170,7 @@ while True:
          
         #Right movement
         
-    if keys[pygame.K_RIGHT] or keys[pygame.K_d] and player.x + playerDistance <= gameWidth - playerWidth:
+    if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and player.x + playerDistance <= gameWidth - playerWidth:
         player.x += playerDistance
         turnedRight = True
 
