@@ -18,11 +18,12 @@ turnedRight = True
 #Gravity
 playerVelocityY = 0
 gravity = 0.5
-jump_strength = -12
+jump_strength = -20
 on_ground = False
 gravityplus = 3
 fastFall = 1
 ground_y = gameHeight
+maxFallSpeed = 20
 #Glidning
 playerVelocityX = 0
 sliding = 0.5
@@ -144,13 +145,14 @@ while True:
                 playerVelocityY = jump_strength - gravityplus 
           
           #Faster fall downwards 
-    if playerVelocityY > 2 and playerVelocityY <15:
+    if playerVelocityY > 2 and playerVelocityY <maxFallSpeed:
                 playerVelocityY += fastFall
 
-    
-         
+    #Makes sure that there is a max fall speed
+    if playerVelocityY > maxFallSpeed:
+        playerVelocityY = maxFallSpeed     
         
-    
+    print(playerVelocityY)
    
     
     
