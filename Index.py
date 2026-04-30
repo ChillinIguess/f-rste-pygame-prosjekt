@@ -19,13 +19,13 @@ turnedRight = True
 #Gravity
 playerVelocityY = 0
 gravity = 0.5
-jump_strength = -20
-on_ground = False
+jump_strength = -15
+onGround = False
 gravityplus = 3
 fastFall = 1
-ground_y = gameHeight
+groundY = gameHeight
 maxFallSpeed = 20
-neutralJump = 0
+neutralJump = 3
 #Glidning
 playerVelocityX = 0
 sliding = 0.5
@@ -113,12 +113,11 @@ while True:
     #player.x = PLAYER_VELOCITY_X
 
     # Collision with ground
-    if player.y + playerHeight >= ground_y:
-        player.y = ground_y - playerHeight
-        playerVelocityY = 0
-        on_ground = True
+    if player.y + playerHeight >= groundY:
+        player.y = groundY - playerHeight
+        onGround = True
         kanHoppe = True
-    
+        playerVelocityY = 0
 
     window.fill(black)
     
@@ -133,16 +132,13 @@ while True:
         
     keys = pygame.key.get_pressed()
 
-    if on_ground == False:
-        if not keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-            if playerVelocityY < neutralJump:
-                playerVelocityY = neutralJump
     
+
     #Jumping
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-        if kanHoppe == False:
+        if kanHoppe == True:
             playerVelocityY = jump_strength 
-            on_ground = False 
+            onGround = False 
             kanHoppe = False
                 
              
@@ -156,6 +152,11 @@ while True:
           #Faster fall downwards 
     if playerVelocityY > 2 and playerVelocityY < maxFallSpeed:
                 playerVelocityY += fastFall
+
+    if not keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+        if onGround == False:
+            if playerVelocityY < neutralJump:
+                playerVelocityY = neutralJump
 
     #Makes sure that there is a max fall speed
     if playerVelocityY > maxFallSpeed:
