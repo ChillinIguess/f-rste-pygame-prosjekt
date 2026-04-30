@@ -6,6 +6,7 @@ import os
 gameWidth = 1280
 gameHeight = 720
 
+
 #Game variables
 playerX = gameWidth/2
 playerY = gameHeight/2
@@ -24,6 +25,7 @@ gravityplus = 3
 fastFall = 1
 ground_y = gameHeight
 maxFallSpeed = 20
+neutralJump = 0
 #Glidning
 playerVelocityX = 0
 sliding = 0.5
@@ -130,22 +132,29 @@ while True:
 
         
     keys = pygame.key.get_pressed()
-    
+
+    if on_ground == False:
+        if not keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+            if playerVelocityY < neutralJump:
+                playerVelocityY = neutralJump
     
     #Jumping
     if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
-        if kanHoppe:
+        if kanHoppe == False:
             playerVelocityY = jump_strength 
             on_ground = False 
-            kanHoppe = False    
-              
-            if keys[pygame.K_s] or keys[pygame.K_DOWN]:
+            kanHoppe = False
+                
+             
+    
+            
+            '''if keys[pygame.K_s] or keys[pygame.K_DOWN]:
                 playerVelocityY = jump_strength + gravityplus
             if keys[pygame.K_w] or keys[pygame.K_UP]:
-                playerVelocityY = jump_strength - gravityplus 
+                playerVelocityY = jump_strength - gravityplus'''
           
           #Faster fall downwards 
-    if playerVelocityY > 2 and playerVelocityY <maxFallSpeed:
+    if playerVelocityY > 2 and playerVelocityY < maxFallSpeed:
                 playerVelocityY += fastFall
 
     #Makes sure that there is a max fall speed
@@ -164,11 +173,13 @@ while True:
        turnedRight = False
    
        '''if player.x >= -5:
-            PLAYER_VELOCITY_X -= PLAYER_DISTANCE
-            player.x -=PLAYER_VELOCITY_X'''
-       '''if keys [pygame.K_LEFT] or keys[pygame.K_a] == False:
-            if player.x >= 0: 
-                player.x -= PLAYER_DISTANCE - sliding'''
+            playerVelocityX-= playerDistance
+            player.x -= playerVelocityX
+       if keys [pygame.K_LEFT] or keys[pygame.K_a] == False:
+            if player.x > 0 and player.x < playerDistance:  
+                player.x -= playerDistance - sliding'''
+          
+               
          
         #Right movement
         
