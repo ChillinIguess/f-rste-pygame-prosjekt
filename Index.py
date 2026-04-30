@@ -28,7 +28,8 @@ maxFallSpeed = 20
 neutralJump = 3
 #Glidning
 playerVelocityX = 0
-sliding = 0.5
+gliding = 0.5
+moving = False
 
 #colors
 white = (255, 255, 255)
@@ -109,8 +110,8 @@ while True:
     
    
     
-    #PLAYER_VELOCITY_X = sliding
-    #player.x = PLAYER_VELOCITY_X
+    playerVelocityX += gliding
+    player.x = playerVelocityX
 
     # Collision with ground
     if player.y + playerHeight >= groundY:
@@ -144,15 +145,12 @@ while True:
              
     
             
-            '''if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-                playerVelocityY = jump_strength + gravityplus
-            if keys[pygame.K_w] or keys[pygame.K_UP]:
-                playerVelocityY = jump_strength - gravityplus'''
           
           #Faster fall downwards 
     if playerVelocityY > 2 and playerVelocityY < maxFallSpeed:
                 playerVelocityY += fastFall
 
+    #Makes the jump hight variable depending on how long you hold jump
     if not (keys[pygame.K_SPACE] or keys[pygame.K_UP]):
         if onGround == False:
             if playerVelocityY < neutralJump:
@@ -161,31 +159,24 @@ while True:
     #Makes sure that there is a max fall speed
     if playerVelocityY > maxFallSpeed:
         playerVelocityY = maxFallSpeed     
-        
-    print(playerVelocityY)
-   
     
     
-           #Left movement
-
-        #if PLAYER_VELOCITY_Y <= jump_strength/3 and (keys[pygame.K_s] or keys[pygame.K_DOWN]): PLAYER_VELOCITY_Y = jump_strength + gravityplus
-    if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and player.x - playerDistance >= 0:
-       player.x -= playerDistance
-       turnedRight = False
+ 
+    #Left movement
+    if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and player.x - playerDistance >= 0: 
+        playerVelocityX -= playerDistance
+        turnedRight = False
    
-       '''if player.x >= -5:
-            playerVelocityX-= playerDistance
-            player.x -= playerVelocityX
-       if keys [pygame.K_LEFT] or keys[pygame.K_a] == False:
-            if player.x > 0 and player.x < playerDistance:  
-                player.x -= playerDistance - sliding'''
+    '''if not (keys[pygame.K_LEFT] or keys[pygame.K_a]):
+        if player.x > 0 and player.x < playerDistance:  
+            player.x -= playerDistance - neutralSpeed'''
           
                
          
         #Right movement
         
     if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and player.x + playerDistance <= gameWidth - playerWidth:
-        player.x += playerDistance
+        playerVelocityX += playerDistance
         turnedRight = True
 
         ''' if player.x <= 5:
