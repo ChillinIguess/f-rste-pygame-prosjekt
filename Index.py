@@ -153,7 +153,7 @@ while True:
     if playerVelocityY > 2 and playerVelocityY < maxFallSpeed:
                 playerVelocityY += fastFall
 
-    if not keys[pygame.K_SPACE] or keys[pygame.K_UP]:
+    if not (keys[pygame.K_SPACE] or keys[pygame.K_UP]):
         if onGround == False:
             if playerVelocityY < neutralJump:
                 playerVelocityY = neutralJump
