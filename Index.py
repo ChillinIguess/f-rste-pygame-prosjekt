@@ -24,9 +24,9 @@ onGround = False
 gravityplus = 1
 fastFall = 1
 groundY = gameHeight
-maxFallSpeed = 20
+maxFallSpeed = 18
 neutralJump = -1
-lowJump = -12
+lowJump = -13
 #Glidning
 playerVelocityX = 0
 gliding = 0.5
