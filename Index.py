@@ -16,16 +16,17 @@ playerDistance = 5
 size = 40
 kanHoppe = False
 turnedRight = True
-#Gravity
+#Gravity and jumping
 playerVelocityY = 0
 gravity = 0.5
 jump_strength = -15
 onGround = False
-gravityplus = 3
+gravityplus = 1
 fastFall = 1
 groundY = gameHeight
 maxFallSpeed = 20
-neutralJump = 3
+neutralJump = -1
+lowJump = -12
 #Glidning
 playerVelocityX = 0
 gliding = 0.5
@@ -109,9 +110,8 @@ while True:
     player.y += playerVelocityY    
     
    
+   
     
-    playerVelocityX += gliding
-    player.x = playerVelocityX
 
     # Collision with ground
     if player.y + playerHeight >= groundY:
@@ -121,13 +121,13 @@ while True:
         playerVelocityY = 0
 
     window.fill(black)
-    
-    '''if event.type == pygame.KEYDOWN:
+     
+    ''' if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_d or event.key == pygame.K_RIGHT: 
-                player.x += PLAYER_DISTANCE
+                player.x += playerDistance
             
             if event.key == pygame.K_a or event.key == pygame.K_LEFT: 
-                player.x -= PLAYER_DISTANCE '''
+                player.x -= playerDistance'''
                 
 
         
@@ -151,7 +151,7 @@ while True:
                 playerVelocityY += fastFall
 
     #Makes the jump hight variable depending on how long you hold jump
-    if not (keys[pygame.K_SPACE] or keys[pygame.K_UP]):
+    if not (keys[pygame.K_SPACE] or keys[pygame.K_UP]) and playerVelocityY > lowJump:
         if onGround == False:
             if playerVelocityY < neutralJump:
                 playerVelocityY = neutralJump
@@ -164,8 +164,11 @@ while True:
  
     #Left movement
     if (keys[pygame.K_LEFT] or keys[pygame.K_a]) and player.x - playerDistance >= 0: 
-        playerVelocityX -= playerDistance
+        player.x -= playerDistance
         turnedRight = False
+    
+
+    
    
     '''if not (keys[pygame.K_LEFT] or keys[pygame.K_a]):
         if player.x > 0 and player.x < playerDistance:  
@@ -175,14 +178,17 @@ while True:
          
         #Right movement
         
-    if (keys[pygame.K_RIGHT] or keys[pygame.K_d]) and player.x + playerDistance <= gameWidth - playerWidth:
-        playerVelocityX += playerDistance
+    if (keys[pygame.K_d] or keys[pygame.K_RIGHT]) and player.x + playerDistance <= gameWidth - playerWidth:
+        player.x += playerDistance
         turnedRight = True
+
+
 
         ''' if player.x <= 5:
             PLAYER_VELOCITY_X += PLAYER_DISTANCE
             player.x += PLAYER_VELOCITY_X'''
-       
+        
+    
 
 #Variables
     player.playerMove()
