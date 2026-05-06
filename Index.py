@@ -12,21 +12,21 @@ playerX = gameWidth/2
 playerY = gameHeight/2
 playerWidth = 40
 playerHeight = 40
-playerDistance = 5
+playerDistance = 6
 size = 40
 kanHoppe = False
 turnedRight = True
 #Gravity and jumping
 playerVelocityY = 0
 gravity = 0.5
-jump_strength = -15
+jump_strength = -20
 onGround = False
-gravityplus = 1
-fastFall = 1
+fastFallStart = -20
+fastFall = 0.5
 groundY = gameHeight
 maxFallSpeed = 18
-neutralJump = -1
-lowJump = -13
+neutralJump = -2
+lowJump = -17
 #Glidning
 playerVelocityX = 0
 gliding = 0.5
@@ -147,7 +147,7 @@ while True:
             
           
           #Faster fall downwards 
-    if playerVelocityY > 2 and playerVelocityY < maxFallSpeed:
+    if playerVelocityY > fastFallStart and playerVelocityY < maxFallSpeed:
                 playerVelocityY += fastFall
 
     #Makes the jump hight variable depending on how long you hold jump
